@@ -13,6 +13,9 @@ This branch is used to accumulate patches to the latest 1.1.x release version. P
 
 Download earlier versions of Marlin on the [Releases page](https://github.com/MarlinFirmware/Marlin/releases). (The latest tagged release of Marlin is version 1.1.9.)
 
+## Upcoming Changes
+- Hardware SPI support for SSD1306 displays
+
 ## Recent Changes
 - Fix hotend temperature changes from LCD UI not being applied to PID controller
 - Fix compiler warnings about 
