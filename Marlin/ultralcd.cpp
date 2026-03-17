@@ -95,6 +95,7 @@ uint8_t lcd_status_update_delay = 1, // First update one loop delayed
 #if ENABLED(DOGLCD)
   #include "ultralcd_impl_DOGM.h"
   #include <U8glib.h>
+  #warning "doglcdincult"
   bool drawing_screen, first_page; // = false
 #else
   #include "ultralcd_impl_HD44780.h"
@@ -1363,15 +1364,15 @@ void lcd_quick_feedback(const bool clear_buttons) {
     #else
       #define _WATCH_FUNC(N) NOOP
     #endif
-    void watch_temp_callback_E0() { _WATCH_FUNC(0); }
+    void watch_temp_callback_E0() { thermalManager.setTargetHotend(thermalManager.target_temperature[0], 0); _WATCH_FUNC(0); }
     #if HOTENDS > 1
-      void watch_temp_callback_E1() { _WATCH_FUNC(1); }
+      void watch_temp_callback_E1() { thermalManager.setTargetHotend(thermalManager.target_temperature[1], 1); _WATCH_FUNC(1); }
       #if HOTENDS > 2
-        void watch_temp_callback_E2() { _WATCH_FUNC(2); }
+        void watch_temp_callback_E2() { thermalManager.setTargetHotend(thermalManager.target_temperature[2], 2); _WATCH_FUNC(2); }
         #if HOTENDS > 3
-          void watch_temp_callback_E3() { _WATCH_FUNC(3); }
+          void watch_temp_callback_E3() { thermalManager.setTargetHotend(thermalManager.target_temperature[3], 3); _WATCH_FUNC(3); }
           #if HOTENDS > 4
-            void watch_temp_callback_E4() { _WATCH_FUNC(4); }
+            void watch_temp_callback_E4() { thermalManager.setTargetHotend(thermalManager.target_temperature[4], 4); _WATCH_FUNC(4); }
           #endif // HOTENDS > 4
         #endif // HOTENDS > 3
       #endif // HOTENDS > 2
