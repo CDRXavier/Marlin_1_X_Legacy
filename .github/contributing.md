@@ -45,13 +45,16 @@ If chat is more your speed, you can join the MarlinFirmware Slack team:
   * Use the `#general` channel for general questions or discussion about Marlin.
   * Other channels exist for certain topics. Check the channel list.
 
+For issues specific to this branch, use the [discussions](https://github.com/CDRXavier/Marlin_1_X_Legacy/discussions) tab in Github.
+
+
 ## How Can I Contribute?
 
 ### Reporting Bugs
 
 This section guides you through submitting a Bug Report for Marlin. Following these guidelines helps maintainers and the community understand your report, reproduce the behavior, and find related reports.
 
-Before creating a Bug Report, please test the "nightly" development branch, as you might find out that you don't need to create one. When you are creating a Bug Report, please [include as many details as possible](#how-do-i-submit-a-good-bug-report). Fill out [the required template](issue_template.md), the information it asks for helps us resolve issues faster.
+Before creating a Bug Report, please see the bugfix development branch, as changes might not have been pushed to releases. When you are creating a Bug Report, please [include as many details as possible](#how-do-i-submit-a-good-bug-report). Fill out [the required template](issue_template.md), the information it asks for helps us resolve issues faster.
 
 > **Note:** Regressions can happen. If you find a **Closed** issue that seems like your issue, go ahead and open a new issue and include a link to the original issue in the body of your new one. All you need to create a link is the issue number, preceded by #. For example, #8888.
 
@@ -93,8 +96,8 @@ Before creating a suggestion, please check [this list](#before-submitting-a-sugg
 
 #### Before Submitting a Feature Request
 
-* **Check the [Marlin website](http://marlinfw.org/)** for tips — you might discover that the feature is already included. Most importantly, check if you're using [the latest version of Marlin](https://github.com/MarlinFirmware/Marlin/releases) and if you can get the desired behavior by changing [Marlin's config settings](http://marlinfw.org/docs/configuration/configuration.html).
-* **Perform a [cursory search](https://github.com/MarlinFirmware/Marlin/issues?q=is%3Aissue)** to see if the enhancement has already been suggested. If it has, add a comment to the existing issue instead of opening a new one.
+* **Check the [Marlin website](http://marlinfw.org/)** for tips — you might discover that the feature is already included. Most importantly, check if you're using [the latest version of Marlin](https://github.com/CDRXavier/Marlin_1_X_Legacy/releases) and if you can get the desired behavior by changing [Marlin's config settings](http://marlinfw.org/docs/configuration/configuration.html).
+* **Perform a [cursory search](https://github.com/CDRXavier/Marlin_1_X_Legacy/issues?q=is%3Aissue)** to see if the enhancement has already been suggested. If it has, add a comment to the existing issue instead of opening a new one.
 
 #### How Do I Submit A (Good) Feature Request?
 
@@ -117,7 +120,7 @@ Unsure where to begin contributing to Marlin? You can start by looking through t
 
 ### Pull Requests
 
-Pull Requests should always be targeted to working branches (e.g., `bugfix-1.1.x` and/or `bugfix-2.0.x`) and never to release branches (e.g., `1.1.x`). If this is your first Pull Request, please read our [Guide to Pull Requests](http://marlinfw.org/docs/development/getting_started_pull_requests.html) and Github's [Pull Request](https://help.github.com/articles/creating-a-pull-request/) documentation.
+Pull Requests should always be targeted to working branches (e.g., `bugfix-1.1.x`) and never to release branches (e.g., `1.1.x`). If this is your first Pull Request, please read our [Guide to Pull Requests](http://marlinfw.org/docs/development/getting_started_pull_requests.html) and Github's [Pull Request](https://help.github.com/articles/creating-a-pull-request/) documentation.
 
 * Fill in [the required template](pull_request_template.md).
 * Don't include issue numbers in the PR title.
