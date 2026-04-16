@@ -15,6 +15,7 @@ Download earlier versions of Marlin on the [Releases page](https://github.com/Ma
 
 ## Upcoming Changes
 - Hardware SPI support for SSD1306 displays
+- Bundled "vendor copy" U8glib
 
 ## Recent Changes
 - Fix hotend temperature changes from LCD UI not being applied to PID controller
