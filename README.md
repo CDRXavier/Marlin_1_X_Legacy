@@ -18,7 +18,7 @@ Download earlier versions of Marlin on the [Releases page](https://github.com/Ma
 
 ## Recent Changes
 - Fix hotend temperature changes from LCD UI not being applied to PID controller
-- Fix compiler warnings about 
+- Fix compiler warnings about certain boards not having hardware timers for certain fan pins.
 - Internally always use native machine space
 - Initial UBL LCD Menu
 - New optimized G-code parser singleton
