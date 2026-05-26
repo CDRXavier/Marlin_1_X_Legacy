@@ -1,7 +1,7 @@
 /*
 ================================================================================
 
-  Marlin Firmware
+  Marlin 1.x Firmware. SSD1306 branch
 
   (c) 2011-2018 MarlinFirmware
   Portions of Marlin are (c) by their respective authors.

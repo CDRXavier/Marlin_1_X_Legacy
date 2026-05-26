@@ -237,9 +237,10 @@
 /**
  * Override here because this is set in Configuration_adv.h
  */
-#if ENABLED(ULTIPANEL) && DISABLED(ELB_FULL_GRAPHIC_CONTROLLER)
-  #undef SD_DETECT_INVERTED
-#endif
+//#if ENABLED(ULTIPANEL) && DISABLED(ELB_FULL_GRAPHIC_CONTROLLER)
+//#warning "SD_DETECT UNINV override"
+//  #undef SD_DETECT_INVERTED
+//#endif
 
 /**
  * Set defaults for missing (newer) options
@@ -1311,6 +1312,24 @@
     #define DOGLCD_MOSI MOSI_PIN
   #endif
 #endif
+
+//uint8_t cs, uint8_t a0, uint8_t reset = U8G_PIN_NONE
+//U8GLIB_SSD1306_XUSTOM u8g(LCD_PINS_ENABLE, LCD_PINS_RS, LCD_PINS_D4)
+
+#if ENABLED(Custom_SSD1306)
+
+  #ifndef OLED_CS_PIN
+    #define OLED_CS_PIN  LCD_PINS_ENABLE   // your chosen pin
+  #endif
+
+  #define OLED_CS_PORT  PIN_TO_OUTPUT_REG(OLED_CS_PIN)
+  #define OLED_CS_MASK  PIN_TO_BITMASK(OLED_CS_PIN)
+
+  #define OLED_CS_HIGH()  (*OLED_CS_PORT |=  OLED_CS_MASK)
+  #define OLED_CS_LOW()   (*OLED_CS_PORT &= ~OLED_CS_MASK)
+
+#endif
+
 
 /**
  * Z_HOMING_HEIGHT / Z_CLEARANCE_BETWEEN_PROBES

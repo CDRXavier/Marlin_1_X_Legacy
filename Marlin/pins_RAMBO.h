@@ -195,8 +195,8 @@
       #define STAT_LED_BLUE_PIN 32
 
     #else // !VIKI2 && !miniVIKI
-
-      #define BEEPER_PIN   79   // AUX-4
+// AUX-4
+      #define BEEPER_PIN   79   
 
       // AUX-2
       #define BTN_EN1      76

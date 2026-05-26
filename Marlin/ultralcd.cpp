@@ -94,7 +94,7 @@ uint8_t lcd_status_update_delay = 1, // First update one loop delayed
 
 #if ENABLED(DOGLCD)
   #include "ultralcd_impl_DOGM.h"
-  #include <U8glib.h>
+  #include "src/U8glib/U8glib.h"
   #warning "doglcdincult"
   bool drawing_screen, first_page; // = false
 #else

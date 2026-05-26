@@ -1,0 +1,185 @@
+#include "U8glib/U8glib.h"
+
+#ifndef N1306SPIWrapper
+#define N1306SPIWrapper
+/*
+ #define ST7565_WRITE_BYTE(a)                 { SPDR = a; while (!TEST(SPSR, SPIF)); U8G_DELAY(); }
+#define ST7560_WriteSequence(count, pointer) { uint8_t *ptr = pointer; for (uint8_t i = 0; i <  count; i++) {SPDR = *ptr++; while (!TEST(SPSR, SPIF));} U8G_DELAY(); }
+
+#if DOGM_SPI_DELAY_US > 0
+  #define U8G_DELAY() DELAY_US(DOGM_SPI_DELAY_US)
+#else
+  #define U8G_DELAY() u8g_10MicroDelay()
+#endif
+
+#define ST7565_CS()   do{ WRITE(ST7565_CS_PIN, HIGH); U8G_DELAY(); }while(0)
+#define ST7565_NCS()      WRITE(ST7565_CS_PIN, LOW)
+#define ST7565_A0()   do{ WRITE(ST7565_A0_PIN, HIGH); U8G_DELAY(); }while(0)
+#define ST7565_NA0()      WRITE(ST7565_A0_PIN, LOW)
+
+#define ST7565_ADC_REVERSE(N)    ST7565_WRITE_BYTE(0xA0 | ((N) & 0x1))
+#define ST7565_BIAS_MODE(N)      ST7565_WRITE_BYTE(0xA2 | ((N) & 0x1))
+#define ST7565_ALL_PIX(N)        ST7565_WRITE_BYTE(0xA4 | ((N) & 0x1))
+#define ST7565_INVERTED(N)       ST7565_WRITE_BYTE(0xA6 | ((N) & 0x1))
+#define ST7565_ON(N)             ST7565_WRITE_BYTE(0xAE | ((N) & 0x1))
+#define ST7565_OUT_MODE(N)       ST7565_WRITE_BYTE(0xC0 | ((N) & 0x1) << 3)
+#define ST7565_POWER_CONTROL(N)  ST7565_WRITE_BYTE(0x28 | (N))
+#define ST7565_V0_RATIO(N)       ST7565_WRITE_BYTE(0x10 | ((N) & 0x7)) // Specific to Displaytech 64128N? (ST7565 is 0x20 | N)
+#define ST7565_CONTRAST(N)   do{ ST7565_WRITE_BYTE(0x81); ST7565_WRITE_BYTE(N); }while(0)
+
+#define ST7565_COLUMN_ADR(N) do{ ST7565_WRITE_BYTE(0x10 | (((N) >> 4) & 0xF)); ST7565_WRITE_BYTE((N) & 0xF); }while(0)
+#define ST7565_PAGE_ADR(N)       ST7565_WRITE_BYTE(0xB0 | (N))
+#define ST7565_START_LINE(N)     ST7565_WRITE_BYTE(0x40 | (N))
+#define ST7565_SLEEP_MODE()      ST7565_WRITE_BYTE(0xAC)
+#define ST7565_NOOP()            ST7565_WRITE_BYTE(0xE3)
+
+uint8_t u8g_dev_st7565_64128n_2x_VIKI_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg) {
+  switch (msg) {
+
+    case U8G_DEV_MSG_INIT:
+    case U8G_DEV_MSG_STOP: break;
+    case U8G_DEV_MSG_PAGE_NEXT:
+    case U8G_DEV_MSG_CONTRAST:
+    case U8G_DEV_MSG_SLEEP_ON:
+    case U8G_DEV_MSG_SLEEP_OFF:
+} return u8g_dev_pb16v1_base_fn(u8g, dev, msg, arg);
+}
+*/
+
+uint8_t u8g_com_ssd1306_xustom_fn(u8g_t *u8g, uint8_t msg, uint8_t arg_val, void *arg_ptr) {
+  switch (msg) {
+
+    case U8G_COM_MSG_INIT:
+      //ssd1306_init();                 // your init
+      break;
+      case U8G_COM_MSG_STOP:
+      break;
+      case U8G_COM_MSG_RESET:
+      // optional: toggle reset pin
+      break;
+//case U8G_COM_MSG_ADDRESS:
+//{ // D/C (A0) line: arg_val == 0 => command, 1 => data
+//if (arg_val) WRITE(DOGLCD_A0, HIGH);
+//else
+//WRITE(DOGLCD_A0, LOW);
+//}
+//break;
+    case U8G_COM_MSG_CHIP_SELECT:
+//      digitalWrite(SSD1306_CS, arg_val ? LOW : HIGH);
+      break;
+      case U8G_COM_MSG_ADDRESS:
+//  WRITE(SSD1306_DC, arg_val ? HIGH : LOW);
+  break;
+
+    //case U8G_COM_MSG_SET_DC:
+  //    digitalWrite(SSD1306_DC, arg_val ? HIGH : LOW);
+      //break;
+
+    case U8G_COM_MSG_WRITE_BYTE:
+  //    if (digitalRead(SSD1306_DC) == LOW)
+  //      ssd1306_sendCommand(arg_val);
+  //    else
+  //      ssd1306_sendData(&arg_val, 1);
+      break;
+
+    case U8G_COM_MSG_WRITE_SEQ:
+  //    ssd1306_sendData((uint8_t*)arg_ptr, arg_val);
+      break;
+
+//case U8G_COM_MSG_WRITE_BYTE:
+// send one byte over HW SPI
+//spiSend((uint8_t)arg_val);
+//break;
+//case U8G_COM_MSG_WRITE_SEQ: {
+//uint8_t *ptr = (uint8_t *)arg_ptr;
+//while (arg_val--) {
+//spiSend(*ptr++);
+//}
+//} break;
+case U8G_COM_MSG_WRITE_SEQ_P: {
+//uint8_t *ptr = (uint8_t *)arg_ptr;
+//while (arg_val--) {
+//spiSend(pgm_read_byte(ptr++));
+//}
+break;
+}
+default:
+break;
+}
+  return 1;
+}
+
+
+uint8_t u8g_dev_ssd1306_xustom_fn(u8g_t *u8g, u8g_dev_t *dev, uint8_t msg, void *arg) {
+  switch (msg) {
+
+    case U8G_DEV_MSG_INIT:
+//TYPICAL PATTERN
+      //u8g_InitCom(u8g, dev, U8G_SPI_CLK_CYCLE_50NS);
+      // send your SSD1306 init sequence here
+      //ssd1306_init();
+      return 1;
+
+    case U8G_DEV_MSG_CONTRAST:
+      //ssd1306_sendCommand(0x81);
+      //ssd1306_sendCommand(*(uint8_t*)arg);
+      return 1;
+
+    case U8G_DEV_MSG_SLEEP_ON:
+      //ssd1306_sendCommand(0xAE);
+      return 1;
+
+    case U8G_DEV_MSG_SLEEP_OFF:
+      //ssd1306_sendCommand(0xAF);
+      return 1;
+  }
+
+  // everything else (PAGE_NEXT, drawing) handled by u8glib
+  return u8g_dev_pb8v1_base_fn(u8g, dev, msg, arg);
+}
+
+
+//these 3 are Old style. DO NOT USE!
+
+//page buffer
+//u8g_pb_t u8g_dev_st7565_dogm128_sw_spi_pb = { ... };
+//bus .. thing
+//u8g_dev_t u8g_dev_st7565_dogm128_sw_spi = {
+//  u8g_dev_st7565_dogm128_fn,
+//  u8g_com_hw_spi_fn
+//};
+
+//u8g_pb_t u8g_dev_ssd1306_xustom_hw_spi_pb = {{8, 64, 0, 0, 0}, 128, u8g_dev_ssd1306_xustom_hw_spi_buf};
+
+//u8g_dev_t u8g_dev_ssd1306_xustom_hw_spi = {
+//  u8g_dev_ssd1306_xustom_fn,     // your device function
+//  &u8g_dev_ssd1306_xustom_hw_spi_pb,      // existing display info
+//  u8g_com_ssd1306_xustom_fn      // your COM backend
+//};
+
+//this is garbage
+
+//U8G_PB_DEV(name, width, height, page_height, dev_fn, com_fn)
+
+//new layout
+//U8G_PB_DEV(u8g_dev_ssd1306_128x64_hw_spi,
+//           WIDTH, HEIGHT, PAGE_HEIGHT,
+//           u8g_dev_ssd1306_128x64_fn,
+//           U8G_COM_HW_SPI);
+
+U8G_PB_DEV(u8g_dev_ssd1306_128x64_hw_spi, 128, 64, 8, u8g_dev_ssd1306_xustom_fn, u8g_com_ssd1306_xustom_fn);
+
+extern u8g_dev_t u8g_dev_ssd1306_128x64_hw_spi;
+
+//typedef struct _u8g_dev_t {
+//  u8g_dev_fnptr u8g_dev_ssd1306_xustom_fn;
+//  u8g_com_fnptr u8g_com_ssd1306_xustom_fn;
+//} u8g_dev_t;
+
+class U8GLIB_SSD1306_XUSTOM : public U8GLIB {
+public:
+  U8GLIB_SSD1306_XUSTOM(uint8_t cs, uint8_t a0, uint8_t reset = U8G_PIN_NONE)
+    : U8GLIB(&u8g_dev_ssd1306_128x64_hw_spi, cs, a0, reset) //8 pages, lines up perfectly
+    { }
+};
+#endif

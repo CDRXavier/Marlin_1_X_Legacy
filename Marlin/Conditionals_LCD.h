@@ -25,6 +25,13 @@
  * Conditionals that need to be set before Configuration_adv.h or pins.h
  */
 
+
+//#elif ENABLED(MKS_12864OLED_SSD1306)
+//  // MKS 128x64 (SSD1306) OLED I2C LCD
+//  //U8GLIB_SSD1306_128X64 u8g(DOGLCD_SCK, DOGLCD_MOSI, DOGLCD_CS, DOGLCD_A0);      // 8 stripes
+//  U8GLIB_SSD1306_128X64 u8g(DOGLCD_CS, DOGLCD_A0);      // hardware SPI
+
+
 #ifndef CONDITIONALS_LCD_H // Get the LCD defines which are needed first
 #define CONDITIONALS_LCD_H
 
@@ -87,7 +94,9 @@
     #define U8GLIB_LM6059_AF
     #define SD_DETECT_INVERTED
   #endif
-
+#elif ENABLED(XUSTOM_SSD1306)
+  #define X8GLIB_SSD1306
+  #define ULTIPANEL
 #elif ENABLED(OLED_PANEL_TINYBOY2)
 
   #define U8GLIB_SSD1306
@@ -153,8 +162,15 @@
   #define ENCODER_STEPS_PER_MENU_ITEM 2
 #endif
 
+#if ENABLED(X8GLIB_SSD1306)
+//#define X8GLIB_SSD1306
+//#define ULTIPANEL
+//#define DOGLCD
+#define SD_DETECT_INVERTED
+#endif
+
 // Generic support for SSD1306 / SSD1309 / SH1106 OLED based LCDs.
-#if ENABLED(U8GLIB_SSD1306) || ENABLED(U8GLIB_SSD1309) || ENABLED(U8GLIB_SH1106)
+#if ENABLED(U8GLIB_SSD1306) || ENABLED(U8GLIB_SSD1309) || ENABLED(U8GLIB_SH1106) || ENABLED (X8GLIB_SSD1306)
   #define ULTRA_LCD  //general LCD support, also 16x2
   #define DOGLCD  // Support for I2C LCD 128x64 (Controller SSD1306 / SSD1309 / SH1106 graphic Display Family)
 #endif

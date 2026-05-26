@@ -36,6 +36,22 @@
   #include "watchdog.h"
 #endif
 
+
+
+#if ENABLED(XUSTOM_SSD1306)
+
+  #ifndef OLED_CS_PIN
+    #define OLED_CS_PIN  LCD_PINS_ENABLE   // your chosen pin
+  #endif
+
+//  #define OLED_CS_PORT  PIN_TO_OUTPUT_REG(OLED_CS_PIN)
+//  #define OLED_CS_MASK  PIN_TO_BITMASK(OLED_CS_PIN)
+
+  #define OLED_CS_HIGH()  WRITE(OLED_CS_PIN, HIGH)
+  #define OLED_CS_LOW()   WRITE(OLED_CS_PIN, LOW)
+  
+#endif
+
 #if DISABLED(SOFTWARE_SPI)
   // functions for hardware SPI
 
@@ -220,14 +236,19 @@ uint32_t Sd2Card::cardSize() {
 }
 
 void Sd2Card::chipSelectHigh() {
-  digitalWrite(chipSelectPin_, HIGH);
+  WRITE(SDSS, HIGH);
+  //chipSelectPin_ is variable
+  //digitalWrite(chipSelectPin_, HIGH);
 }
 
 void Sd2Card::chipSelectLow() {
+  WRITE(OLED_CS_PIN, HIGH);
   #if DISABLED(SOFTWARE_SPI)
     spiInit(spiRate_);
   #endif  // SOFTWARE_SPI
-  digitalWrite(chipSelectPin_, LOW);
+  WRITE(SDSS, LOW);
+  //chipSelectPin_ is variable
+  //digitalWrite(chipSelectPin_, LOW);
 }
 
 /**

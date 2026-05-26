@@ -23,7 +23,7 @@
 #ifndef ULCDST7565_H
 #define ULCDST7565_H
 
-#include <U8glib.h>
+#include "src/U8glib/U8glib.h"
 #include "delay.h"
 
 #define ST7565_CLK_PIN  DOGLCD_SCK

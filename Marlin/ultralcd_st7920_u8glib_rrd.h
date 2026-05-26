@@ -23,7 +23,7 @@
 #ifndef ULCDST7920_H
 #define ULCDST7920_H
 
-#include <U8glib.h>
+#include "src/U8glib/U8glib.h"
 #include "delay.h"
 
 #define ST7920_CLK_PIN  LCD_PINS_D4

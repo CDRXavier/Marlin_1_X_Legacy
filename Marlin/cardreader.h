@@ -207,6 +207,7 @@ private:
 #if PIN_EXISTS(SD_DETECT)
   #if ENABLED(SD_DETECT_INVERTED)
     #define IS_SD_INSERTED()  READ(SD_DETECT_PIN)
+    #warning "SD INVERTED"
   #else
     #define IS_SD_INSERTED() !READ(SD_DETECT_PIN)
   #endif

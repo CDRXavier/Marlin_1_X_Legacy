@@ -43,7 +43,7 @@
 
 #include "MarlinConfig.h"
 
-#include <U8glib.h>
+#include "src/U8glib/U8glib.h"
 
 #include "ultralcd.h"
 #include "dogm_bitmaps.h"
@@ -66,6 +66,11 @@
 
 #if ENABLED(U8GLIB_ST7565_64128N)
   #include "ultralcd_st7565_u8glib_VIKI.h"
+#endif
+
+#if ENABLED(X8GLIB_SSD1306)
+  #warning "ergthfnf"
+  #include "1306SPIWrapper.h"
 #endif
 
 #if ENABLED(USE_SMALL_INFOFONT)
@@ -189,12 +194,17 @@
   //U8GLIB_NHD_C12864_2X u8g(DOGLCD_CS, DOGLCD_A0); // 4 stripes  HWSPI
 #elif ENABLED(MKS_12864OLED_SSD1306)
   // MKS 128x64 (SSD1306) OLED I2C LCD
-  U8GLIB_SSD1306_128X64 u8g(DOGLCD_SCK, DOGLCD_MOSI, DOGLCD_CS, DOGLCD_A0);      // 8 stripes
-  //U8GLIB_SSD1306_128X64_2X u8g(DOGLCD_SCK, DOGLCD_MOSI, DOGLCD_CS, DOGLCD_A0); // 4 stripes
+  //U8GLIB_SSD1306_128X64 u8g(DOGLCD_SCK, DOGLCD_MOSI, DOGLCD_CS, DOGLCD_A0);      // 8 stripes
+  //U8GLIB_SSD1306_128X64 u8g(DOGLCD_CS, DOGLCD_A0);      // hardware SPI
+  U8GLIB_SSD1306_128X64_2X u8g(DOGLCD_SCK, DOGLCD_MOSI, DOGLCD_CS, DOGLCD_A0); // 4 stripes
 #elif ENABLED(U8GLIB_SSD1306)
   // Generic support for SSD1306 OLED I2C LCDs
   //U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_NONE | U8G_I2C_OPT_FAST);  // 8 stripes
   U8GLIB_SSD1306_128X64_2X u8g(U8G_I2C_OPT_NONE | U8G_I2C_OPT_FAST); // 4 stripes
+#elif ENABLED(X8GLIB_SSD1306)
+  //U8GLIB_SSD1306_XUSTOM u8g; //new com constructor
+  U8GLIB_SSD1306_XUSTOM u8g(LCD_PINS_ENABLE, LCD_PINS_RS, LCD_PINS_D4); //Hardware SPI
+  #warning "X8G DOGM"
 #elif ENABLED(MKS_12864OLED)
   // MKS 128x64 (SH1106) OLED I2C LCD
   U8GLIB_SH1106_128X64 u8g(DOGLCD_SCK, DOGLCD_MOSI, DOGLCD_CS, DOGLCD_A0);      // 8 stripes

@@ -32,7 +32,7 @@
 
 #if ENABLED(SHOW_BOOTSCREEN)
 
-  //#define START_BMPHIGH // Costs 399 bytes more flash
+  #define START_BMPHIGH // Costs 399 bytes more flash
 
   #if ENABLED(SHOW_CUSTOM_BOOTSCREEN)
 
@@ -45,7 +45,7 @@
   #endif
 
   #if ENABLED(START_BMPHIGH)
-
+#warning "compiling bootscreen"
     #define START_BMPWIDTH      112
 
     const unsigned char start_bmp[] PROGMEM = {
