@@ -1272,8 +1272,8 @@ void ce_LoopKing(void)
 /*==============================================================*/
 
 /*
-  doppelschritt: nur von der grundlinie aus, beide (!) felder vor dem bauern müssen frei sein
-  en passant: nur unmittelbar nachdem ein doppelschritt ausgeführt wurde.
+  doppelschritt: nur von der grundlinie aus, beide (!) felder vor dem bauern mÃ¼ssen frei sein
+  en passant: nur unmittelbar nachdem ein doppelschritt ausgefÃ¼hrt wurde.
 */
 void ce_LoopPawnSideCapture(uint8_t loop_pos)
 {
